@@ -1,0 +1,66 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-09T00:21:32.954Z",
+  "summary": "Landing page UI sections and embedded auth iframe are implemented, and the contact form UX uses a React Query mutation to call the backend. However, the backend contact-submission model does not meet the required schema (name/email/message/timestamp), is not persisted to stable storage, and the listing query is admin-only and returns only raw text messages. Several unrequested access-control/user-profile features were added.",
+  "missing_requirements": [
+    {
+      "id": "REQ-3",
+      "requirement": "Add backend support to receive and persist contact form submissions (name, email, message, server timestamp) in stable storage, and expose a query method to list submissions.",
+      "reason": "Backend only stores an in-memory `var submissions : [Text]` and `submitContactForm` accepts a single `message : Text` with no structured fields or server timestamp; no stable storage upgrade hooks are shown; listing is `getAllSubmissions` returning `[Text]` and is admin-only rather than a basic verification/testing query for recent submissions.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Wire the contact form submission to the backend using existing actor/React Query patterns so the backend stores name, email, and message (and can be refetched/invalidated where appropriate) without modifying immutable hook files.",
+      "reason": "Frontend mutation and form currently submit a single formatted text blob (combined name/email/message) to `actor.submitContactForm(message)` rather than sending structured fields matching the backend requirement (name/email/message). This prevents storing the required structured data on the backend.",
+      "evidence": [
+        "frontend/src/components/ContactForm.tsx",
+        "frontend/src/hooks/useSubmitContactForm.ts",
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Access control / authorization system initialization and admin-only gating of submissions.",
+      "reason": "BuildRequest did not ask for role-based access control, secret-based initialization, or admin-only viewing for contact submissions; it asked for a simple query to list recent submissions for verification/testing.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "User profile storage and related profile management endpoints.",
+      "reason": "BuildRequest scope is a marketing landing page plus contact submission storage; user profiles were not requested.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "confidence": 0.74,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/ContactForm.tsx",
+    "frontend/src/components/EmbeddedSmartQrAuth.tsx",
+    "frontend/src/components/sections/ContactSection.tsx",
+    "frontend/src/components/sections/FeatureHighlightsSection.tsx",
+    "frontend/src/components/sections/ProductOverviewSection.tsx",
+    "frontend/src/config/landing.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useSubmitContactForm.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

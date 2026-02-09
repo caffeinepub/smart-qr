@@ -1,0 +1,11 @@
+{
+  "frontend/src/App.tsx": "Main landing page component with header, hero section, product overview, features, embedded auth, contact form, and footer with smooth scroll navigation using QrCode icon from lucide-react.",
+  "frontend/src/components/sections/ProductOverviewSection.tsx": "Product overview section showcasing Smart QR's core value propositions with security, speed, and availability highlights in a card-based layout using QrCode icon from lucide-react.",
+  "frontend/src/components/sections/FeatureHighlightsSection.tsx": "Feature highlights section displaying six key features in a responsive grid with icons, badges, and descriptions.",
+  "frontend/src/components/sections/ContactSection.tsx": "Contact section wrapper that provides heading and renders the ContactForm component.",
+  "frontend/src/components/ContactForm.tsx": "Contact form component with name, email, and message fields, client-side validation, loading states, and success/error handling using React Query mutation.",
+  "frontend/src/components/EmbeddedSmartQrAuth.tsx": "Embedded iframe component that loads the Smart QR Login/Register app from a configurable URL with fallback error message.",
+  "frontend/src/config/landing.ts": "Configuration helper that retrieves the Smart QR embed URL from environment variables.",
+  "frontend/src/hooks/useSubmitContactForm.ts": "React Query mutation hook for submitting contact form data to the backend actor.",
+  "frontend/src/index.css": "Global styles with OKLCH color system using a vibrant indigo/purple primary palette (hue 160) for both light and dark modes."
+}

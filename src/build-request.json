@@ -1,0 +1,127 @@
+{
+  "kind": "build_request",
+  "title": "Smart QR landing page with product overview, feature highlights, contact form, and embedded Login/Register app",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a single-page Smart QR marketing landing page that includes: (1) a product overview section, (2) a feature highlights section, (3) a contact form, and (4) an embedded view of the existing Smart QR Login/Register app.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4",
+          "msg-7"
+        ],
+        "quotes": [
+          "product overview, feature highlights, contact form,  amd embed of the Smart QR Login / Register app",
+          "yes please"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Landing page renders as the primary app route and is usable on desktop and mobile.",
+        "Page contains clearly labeled sections for Product Overview, Feature Highlights, Contact, and an embedded Login/Register area.",
+        "All user-facing text is in English.",
+        "Embed loads inside the page via a configurable URL (e.g., environment/config value) so it can be pointed at the existing Smart QR Login/Register deployment without code changes."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement the contact form UX (name, email, message) with client-side validation and submission state handling (loading, success, error).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "product overview, feature highlights, contact form,  amd embed of the Smart QR Login / Register app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Form includes fields: Name, Email, Message; all required; Email must be valid format.",
+        "On submit, the form shows a loading state and prevents duplicate submissions.",
+        "On success, show a clear confirmation message and reset the form.",
+        "On failure, show a clear error message without losing the user’s typed inputs (except as appropriate)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add backend support to receive and persist contact form submissions in the single Motoko canister, and expose a query method to list submissions for basic verification/testing.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "product overview, feature highlights, contact form,  amd embed of the Smart QR Login / Register app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend provides an update method to create a contact submission with: name, email, message, and server timestamp.",
+        "Submissions are persisted in stable storage so they survive canister upgrades.",
+        "Backend provides a query method to return recent submissions (suitable for verifying that submissions are stored)."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Wire the contact form submission to the backend using the existing actor/React Query patterns in the template without modifying immutable hook files.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "product overview, feature highlights, contact form,  amd embed of the Smart QR Login / Register app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Submitting the contact form calls the Motoko backend method and stores the submission.",
+        "Frontend uses React Query mutation patterns for submission and invalidation/refetch where appropriate.",
+        "No changes are made to files under frontend/src/hooks/useInternetIdentity.ts(.tsx), frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui source files (compose them only)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Apply a coherent visual theme to the landing page (colors, typography, spacing, and component styling) and use it consistently across all sections; avoid a blue/purple primary palette.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "i need a landing page please"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Landing page uses a consistent design system (type scale, spacing, button/input styles) across all sections.",
+        "Primary palette is not blue/purple; use a distinct alternative (e.g., charcoal + emerald + warm neutrals) consistently.",
+        "Design is responsive and visually polished (no overlapping elements, readable contrast, consistent alignment)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all logic in backend/main.mo).",
+    "Do not edit immutable frontend paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, and source files under frontend/src/components/ui (compose only).",
+    "No third-party email/SMS integrations (contact submissions must be handled within the app/canister)."
+  ],
+  "nonGoals": [
+    "Do not rebuild the Smart QR app itself (QR generation/scanning/history) beyond embedding the existing Login/Register app.",
+    "Do not implement third-party authentication beyond Internet Identity.",
+    "Do not implement outbound email sending for contact form submissions."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [
+      "User-facing text should be in English."
+    ],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

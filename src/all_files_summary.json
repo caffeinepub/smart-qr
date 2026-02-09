@@ -1,0 +1,22 @@
+{
+  "backend/main.mo": "Actor providing user profile management with access control plus public contact form submission and admin-only retrieval.",
+  "feature_evidence.json": "Feature evidence report mapping feature IDs to related files, components, and test IDs.",
+  "frontend-file-summaries.txt": "Text file listing short summaries for key frontend source files.",
+  "frontend/index.css": "Tailwind CSS base and theme variables defining color system for light and dark modes.",
+  "frontend/index.html": "HTML entry point mounting the React app and loading main.tsx.",
+  "frontend/src/App.tsx": "Main landing page layout with hero, overview, features, embedded auth, and contact sections.",
+  "frontend/src/components/ContactForm.tsx": "Contact form with validation and React Query submission handling including success and error states.",
+  "frontend/src/components/EmbeddedSmartQrAuth.tsx": "Iframe embed component for loading the Smart QR authentication app with error fallback.",
+  "frontend/src/components/sections/ContactSection.tsx": "Section wrapper rendering the contact form with heading and layout.",
+  "frontend/src/components/sections/FeatureHighlightsSection.tsx": "Grid-based feature highlights section displaying icons, badges, and descriptions.",
+  "frontend/src/components/sections/ProductOverviewSection.tsx": "A React section component rendering feature cards and a QR overview for the landing page.",
+  "frontend/src/config/landing.ts": "Provides a helper to read and return the Smart QR embed URL from environment variables.",
+  "frontend/src/hooks/useActor.ts": "React hook that creates and manages a backend actor instance tied to Internet Identity, refreshing dependent queries on change.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Implements Internet Identity context and provider, handling login, stored identities, and AuthClient lifecycle.",
+  "frontend/src/hooks/useSubmitContactForm.ts": "React Query mutation hook to submit contact form messages through the backend actor.",
+  "frontend/src/index.css": "Tailwind base styles and theme variables defining color tokens for light and dark modes.",
+  "frontend/src/main.tsx": "App entry point initializing QueryClient, InternetIdentityProvider, and rendering the React application.",
+  "frontend/src/utils/urlParams.ts": "Utility functions for reading, storing, and clearing URL and session-based parameters.",
+  "frontend/tailwind.config.js": "Tailwind configuration with theme extensions, color mappings, animations, and plugin setup.",
+  "project_state.json": "Tracks project state for the Smart QR landing page build, including existing features, new feature requests, and known issues. Contains metadata on required UI sections, contact form integration, and backend needs."
+}
