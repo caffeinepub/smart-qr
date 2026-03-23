@@ -1,0 +1,90 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-single-page-smart-qr-marketing-landing-page-that-includes-1-a-product-overview-section-2-a-feature-highlights-section-3-a-contact-form-and-4-an-embedded-view-of-the-existing-smart-qr-login-register-app",
+      "featureTitle": "Create a single-page Smart QR marketing landing page that includes: (1) a product overview section, (2) a feature highlights section, (3) a contact form, and (4) an embedded view of the existing Smart QR Login/Register app.",
+      "files": [
+        "frontend/index.html",
+        "frontend/src/App.tsx",
+        "frontend/src/components/EmbeddedSmartQrAuth.tsx",
+        "frontend/src/config/landing.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-contact-form-ux-name-email-message-with-client-side-validation-and-submission-state-handling-loading-success-error",
+      "featureTitle": "Implement the contact form UX (name, email, message) with client-side validation and submission state handling (loading, success, error).",
+      "files": [
+        "frontend/src/components/ContactForm.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-wire-the-contact-form-submission-to-the-backend-using-the-existing-actor-react-query-patterns-in-the-template-without-modifying-immutable-hook-files",
+      "featureTitle": "Wire the contact form submission to the backend using the existing actor/React Query patterns in the template without modifying immutable hook files.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ContactForm.tsx",
+        "frontend/src/hooks/useSubmitContactForm.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-coherent-visual-theme-to-the-landing-page-colors-typography-spacing-and-component-styling-and-use-it-consistently-across-all-sections-avoid-a-blue-purple-primary-palette",
+      "featureTitle": "Apply a coherent visual theme to the landing page (colors, typography, spacing, and component styling) and use it consistently across all sections; avoid a blue/purple primary palette.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/sections/FeatureHighlightsSection.tsx",
+        "frontend/src/components/sections/ProductOverviewSection.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

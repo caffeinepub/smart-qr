@@ -1,0 +1,128 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Smart QR marketing landing page (single page) with contact form + embedded Login/Register",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement a single-page Smart QR marketing landing page with Product Overview, Feature Highlights, Contact, and an embedded Login/Register view loaded from a configurable URL.",
+      "acceptanceCriteria": [
+        "Landing page renders as the primary app route and is usable on desktop and mobile.",
+        "Page contains clearly labeled sections for Product Overview, Feature Highlights, Contact, and an embedded Login/Register area.",
+        "All user-facing text is in English.",
+        "Embed loads inside the page via a configurable URL (e.g., environment/config value) so it can be pointed at the existing Smart QR Login/Register deployment without code changes."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the primary app route as a single-page landing experience that renders the required sections (Product Overview, Feature Highlights, Contact, embedded Login/Register) and provides responsive layout. Use shadcn-ui components (e.g., Card/Button/Input/Textarea as available under frontend/src/components/ui) to build consistent section structure and form shell. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/EmbeddedSmartQrAuth.tsx",
+          "operation": "create",
+          "description": "Add an embedded Login/Register area component that renders an iframe (or equivalent embed container) whose src is read from a configurable value (env/config). Include basic UX for missing/invalid URL (e.g., explanatory message) while keeping all text in English."
+        },
+        {
+          "path": "frontend/src/config/landing.ts",
+          "operation": "create",
+          "description": "Add a small frontend config helper that exposes a configurable embed URL (e.g., from Vite env like VITE_SMART_QR_EMBED_URL / similar) for the embedded Login/Register view, without requiring code changes to repoint deployments."
+        },
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Ensure the document title and metadata remain appropriate for a marketing landing page (English text) and align with the Smart QR branding used in the landing page UI."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Build the contact form UX with Name/Email/Message fields, client-side validation, and loading/success/error submission states.",
+      "acceptanceCriteria": [
+        "Form includes fields: Name, Email, Message; all required; Email must be valid format.",
+        "On submit, the form shows a loading state and prevents duplicate submissions.",
+        "On success, show a clear confirmation message and reset the form.",
+        "On failure, show a clear error message without losing the user’s typed inputs (except as appropriate)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ContactForm.tsx",
+          "operation": "create",
+          "description": "Implement the contact form UI with controlled inputs for Name/Email/Message, client-side validation (required fields + email format), and visible submission states (loading disables submit, success confirmation, error message). Use shadcn-ui form-friendly components (e.g., Input/Textarea/Button/Card/Alert as available) to keep styling consistent. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ContactSection.tsx",
+          "operation": "create",
+          "description": "Add a landing-page section wrapper for the contact area that provides section heading/description (English) and renders ContactForm with appropriate spacing and responsive layout. Use shadcn-ui layout primitives where appropriate (e.g., Card). Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Wire contact form submission to the Motoko backend using existing actor + React Query patterns without modifying immutable hook/UI source files.",
+      "acceptanceCriteria": [
+        "Submitting the contact form calls the Motoko backend method and stores the submission.",
+        "Frontend uses React Query mutation patterns for submission and invalidation/refetch where appropriate.",
+        "No changes are made to files under frontend/src/hooks/useInternetIdentity.ts(.tsx), frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui source files (compose them only)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useSubmitContactForm.ts",
+          "operation": "create",
+          "description": "Create a React Query mutation hook that uses useActor() to call the backend capability for contact submission (backendInterface.submitContactForm). Package Name/Email/Message into the payload as needed while backend support evolves (e.g., serialize as a single string) and surface mutation states for the UI. Do not modify immutable hook files."
+        },
+        {
+          "path": "frontend/src/components/ContactForm.tsx",
+          "operation": "modify",
+          "description": "Wire the form submit handler to useSubmitContactForm() and implement duplicate-submit prevention via mutation loading state; on success reset inputs and show confirmation; on error preserve typed values and show an error message. Use shadcn-ui components for alerts/buttons as available. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure the landing page composes the Contact section that uses the wired ContactForm, and that no changes are required in immutable files (useActor/useInternetIdentity/main.tsx/components/ui sources)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Apply a coherent, responsive visual theme across the landing page with a non-blue/non-purple primary palette.",
+      "acceptanceCriteria": [
+        "Landing page uses a consistent design system (type scale, spacing, button/input styles) across all sections.",
+        "Primary palette is not blue/purple; use a distinct alternative (e.g., charcoal + emerald + warm neutrals) consistently.",
+        "Design is responsive and visually polished (no overlapping elements, readable contrast, consistent alignment)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Define global theme tokens (CSS variables used by Tailwind/shadcn) and base typography/spacing defaults for the app. Set primary colors to a non-blue/non-purple palette (e.g., charcoal + emerald + warm neutrals) and ensure readable contrast in light/dark as applicable."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions only as needed to support the chosen non-blue/non-purple palette and consistent typography/spacing on the landing page (prefer using existing CSS variable-driven shadcn theme tokens where possible)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Apply consistent section spacing, typography scale, and component styling across Product Overview, Feature Highlights, Contact, and embedded Login/Register area using Tailwind utility classes and composed shadcn-ui components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/ProductOverviewSection.tsx",
+          "operation": "create",
+          "description": "Create a responsive Product Overview section component with English copy, consistent typography, and clear layout. Use shadcn-ui components (e.g., Card) where appropriate to match the global theme. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/sections/FeatureHighlightsSection.tsx",
+          "operation": "create",
+          "description": "Create a responsive Feature Highlights section component (e.g., grid of highlights) with English copy and consistent styling that matches the non-blue/non-purple theme. Use shadcn-ui components (e.g., Card/Badge) where available. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Compose ProductOverviewSection and FeatureHighlightsSection into the landing page in the correct order with clear section labels/headings and responsive behavior (mobile-first)."
+        }
+      ]
+    }
+  ]
+}
